@@ -140,7 +140,6 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/dsp:/dsp \
     /vendor/firmware_mnt:/firmware \
     /mnt/vendor/persist:/persist \
-    /mnt/vendor/efs:/efs
 
 # Graphics
 BOARD_USES_ADRENO := true
