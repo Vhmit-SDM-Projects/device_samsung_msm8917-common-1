@@ -38,6 +38,7 @@ on early-init
     mkdir /system 0777 root root
     mkdir /bt_firmware 0771 system system
     symlink /data/tombstones /tombstones
+    mkdir /efs 0771 system radio
     mkdir /dsp 0771 media media
 
 on fs
@@ -50,6 +51,12 @@ on fs
     mkdir /mnt/vendor/persist/data 0700 system system
     mkdir /mnt/vendor/persist/bms 0700 root system
     restorecon_recursive /mnt/vendor/persist
+
+    wait /dev/block/bootdevice/by-name/efs
+    mount ext4 /dev/block/bootdevice/by-name/efs /efs nosuid nodev noatime noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic
+    chown system radio /efs
+    chmod 0771 /efs
+    restorecon -R /efs
 
     write /proc/sys/vm/swappiness 100
     #write /sys/kernel/boot_adsp/boot 1

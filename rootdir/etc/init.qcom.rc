@@ -351,6 +351,11 @@ on boot
     # Create hvdcp_opti directory
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
 
+on fs
+# /efs/factory.prop for Dual / Single SIM settings
+    chown radio radio /efs/factory.prop
+    chmod 0600 /efs/factory.prop
+
     #sensors log dir
     mkdir /data/vendor/sensors
     chown system system /data/vendor/sensors
