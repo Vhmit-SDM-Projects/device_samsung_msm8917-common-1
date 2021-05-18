@@ -299,6 +299,10 @@
          that can be set by the user. -->
      <integer name="config_screenBrightnessDoze">17</integer>
 
+    <!-- Amount of time in ms the user needs to press the relevant keys to trigger the
+         screenshot chord -->
+     <integer name="config_screenshotChordKeyTimeout">0</integer>
+	
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
      <integer name="config_screenBrightnessSettingDefault">128</integer>
