@@ -81,6 +81,10 @@ on post-fs-data
     mkdir /persist/data/tz 0700 system system
     mkdir /data/vendor/hbtp 0750 system system
     mkdir /data/misc/dts 0770 media audio
+
+    # Clear existing log and start the service
+    rm /cache/boot_log.txt
+    start logger
 	
 # for WIFI MAC address
     mkdir /mnt/vendor/efs/wifi 0755 wifi wifi
@@ -143,6 +147,9 @@ service qrngp /system/bin/qrngp -f
 
 on property:sys.boot_completed=1
    start qrngp
+
+    # Stop logging service
+   stop logger
 
 service vendor.qseecomd /vendor/bin/qseecomd
    class core
@@ -327,6 +334,13 @@ service dtseagleservice /system/vendor/bin/dts_eagle_service
     user system
     group audio media
     disabled
+
+service logger /system/bin/logcat -b all -D -f /cache/boot_log.txt
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
 
 service adsprpcd /system/vendor/bin/adsprpcd
     class main
