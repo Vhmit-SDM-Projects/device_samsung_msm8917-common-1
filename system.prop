@@ -1,9 +1,12 @@
-# Import EFS Properities
-# import /efs/factory.prop
+# Blur
 ro.sf.blurs_are_expensive=1
 ro.surface_flinger.supports_background_blur=1
 debug.sf.disable_backpressure=1
+
+# Optimize shutdown service
 ro.build.shutdown_timeout=2
+
+# Ram Management
 ro.config.fha_enable=true
 ro.sys.fw.bg_apps_limit=32
 ro.config.dha_cached_max=16
