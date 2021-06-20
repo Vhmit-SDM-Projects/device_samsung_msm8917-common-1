@@ -1,0 +1,8 @@
+allow hal_health_default sysfs:file read;
+allow hal_health_default sysfs:file open;
+allow hal_health_default sysfs:file getattr;
+
+allow hal_health_default app_efs_file:dir search;
+allow hal_health_default app_efs_file:file read;
+allow hal_health_default app_efs_file:file open;
+allow hal_health_default app_efs_file:file getattr;
