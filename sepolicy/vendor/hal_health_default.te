@@ -10,3 +10,5 @@ allow hal_health_default app_efs_file:file write;
 allow hal_health_default app_efs_file:file setattr;
 
 allow hal_health_default efs_file:dir search;
+
+allow hal_health_default debugfs_trace_marker:file getattr;

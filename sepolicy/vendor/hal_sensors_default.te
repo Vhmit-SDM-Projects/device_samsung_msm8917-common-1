@@ -16,5 +16,8 @@ allow hal_sensors_default sysfs:file { read write };
 allow hal_sensors_default sysfs:file open;
 allow hal_sensors_default sysfs:file getattr;
 
+allow hal_sensors_default debugfs_trace_marker:file getattr;
+allow hal_sensors_default sysfs:dir read;
+
 r_dir_file(hal_sensors_default, efs_file)
 r_dir_file(hal_sensors_default, sec_poc_file)
