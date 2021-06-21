@@ -6,3 +6,7 @@ allow hal_health_default app_efs_file:dir search;
 allow hal_health_default app_efs_file:file read;
 allow hal_health_default app_efs_file:file open;
 allow hal_health_default app_efs_file:file getattr;
+allow hal_health_default app_efs_file:file write;
+allow hal_health_default app_efs_file:file setattr;
+
+allow hal_health_default efs_file:dir search;

@@ -46,6 +46,8 @@ allow tee gatekeeper_data_file:dir open;
 allow tee gatekeeper_data_file:file read;
 allow tee gatekeeper_data_file:file open;
 allow tee gatekeeper_data_file:file getattr;
+allow tee gatekeeper_data_file:file write;
+allow tee gatekeeper_data_file:dir search;
 
 get_prop(tee, hwservicemanager_prop)
 set_prop(tee, vendor_qseecomd_prop)
