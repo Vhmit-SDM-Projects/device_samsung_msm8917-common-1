@@ -1,2 +1,1 @@
-allow system_suspend vendor_file:file read;
 allow system_suspend debugfs_trace_marker:file getattr;

@@ -1,1 +1,0 @@
-allow gpuservice vendor_file:file read;

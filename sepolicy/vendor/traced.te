@@ -1,2 +1,0 @@
-allow traced_probes vendor_file:file read;
-allow traced vendor_file:file read;

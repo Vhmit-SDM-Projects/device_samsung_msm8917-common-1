@@ -1,1 +1,0 @@
-allow boringssl_self_test vendor_file:file read;
