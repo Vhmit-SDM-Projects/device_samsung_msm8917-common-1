@@ -1,0 +1,5 @@
+allow rild csc_prop:file read;
+allow rild proc_net:file write;
+allow rild vendor_data_file:dir write;
+allow rild default_prop:property_service set;
+allow rild system_data_file:dir write;

@@ -9,4 +9,4 @@ allow hal_gnss_qti vendor_gps_file:dir rw_dir_perms;
 allow hal_gnss_qti vendor_gps_file:file create_file_perms;
 
 allow hal_gnss_qti debugfs_trace_marker:file getattr;
-allow hal_gnss_qti csc_prop:file read;
+allow hal_gnss_qti csc_prop:file { read open };
