@@ -1,3 +1,9 @@
 allow init omr_file:dir mounton;
 
 allow init sysfs_vibrator:file read;
+allow init hal_perf_default:binder call;
+allow init mm-qcamerad:unix_dgram_socket sendto;
+allow init ion_device:chr_file ioctl;
+allow init same_process_hal_file:file execute;
+allow init gpu_device:chr_file { read write };
+allow init gpu_device:chr_file open;
