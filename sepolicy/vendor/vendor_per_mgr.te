@@ -1,1 +1,1 @@
-allow vendor_per_mgr:capability net_raw;
+allow vendor_per_mgr  vendor_file:capability net_raw;
