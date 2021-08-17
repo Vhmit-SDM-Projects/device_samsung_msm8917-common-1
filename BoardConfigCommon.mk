@@ -118,9 +118,11 @@ TARGET_SEC_FP_HAL_VARIANT := bauth
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
+ifneq ($(filter j4primelte j6primelte, $(TARGET_DEVICE)),)
 ODM_MANIFEST_SKUS += msm8917NFC
 ODM_MANIFEST_MSM8917NFC_FILES := \
     $(COMMON_PATH)/manifest-nfc.xml
+endif
 
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
