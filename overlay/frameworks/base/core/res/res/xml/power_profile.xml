@@ -30,13 +30,13 @@
     <array name="cpu.clusters.cores">
         <value>4</value>
     </array>
-    <array name="cpu.core_speeds.cluster0">
+    <array name="cpu.speeds.cluster0">
         <value>960000</value>
         <value>1094400</value>
         <value>1248000</value>
         <value>1401000</value>
     </array>
-    <array name="cpu.core_power.cluster0">
+    <array name="cpu.active.cluster0">
         <value>84</value>
         <value>112</value>
         <value>134</value>
