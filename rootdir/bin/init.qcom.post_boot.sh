@@ -252,7 +252,7 @@ function 8917_sched_dcvs_hmp()
     echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     echo 1094400 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
     echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-    echo "1 960000:85 1094400:90" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    echo "1 200000:85 1094400:90" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
     echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
     echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
 
@@ -2196,8 +2196,15 @@ case "$target" in
                 #disable sched_boost in 8917
                 echo 0 > /proc/sys/kernel/sched_boost
 
-		# core_ctl is not needed for 8917. Disable it.
-                disable_core_ctl
+		# core_ctl  for 8917. 
+		echo 0 > /sys/devices/system/cpu/cpu0/core_ctl/disable
+		echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/is_big_cluster          
+		echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
+        echo 4 > /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
+        echo 68 > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
+        echo 40 > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
+        echo 100 > /sys/devices/system/cpu/cpu0/core_ctl/offline_delay_ms
+        echo 4 > /sys/devices/system/cpu/cpu0/core_ctl/task_thres
 
                 for devfreq_gov in /sys/class/devfreq/qcom,mincpubw*/governor
                 do
@@ -2234,7 +2241,8 @@ case "$target" in
                 else
                     8917_sched_dcvs_hmp
                 fi
-                echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 200000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 1401000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
                 # re-enable thermal core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
 
