@@ -45,6 +45,7 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all /vendor/etc/fstab.qcom
+    swapon_all /vendor/etc/fstab.qcom
     setprop ro.crypto.fde_algorithm AES-256-XTS
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
@@ -58,7 +59,7 @@ on fs
     chmod 0771 /efs
     restorecon -R /efs
 
-    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/swappiness 60
     #write /sys/kernel/boot_adsp/boot 1
     wait /dev/block/bootdevice/by-name/oem
     mount ext4 /dev/block/bootdevice/by-name/oem /oem ro nosuid nodev barrier=1
