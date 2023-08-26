@@ -70,7 +70,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm8937
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/bluetooth/include
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/configs/bluetooth/include
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 QCOM_BT_USE_SMD_TTY := true
@@ -117,12 +117,12 @@ TARGET_USES_HWC2 := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/vintf/manifest.xml
+DEVICE_MATRIX_FILE := $(COMMON_PATH)/configs/vintf/compatibility_matrix.xml
 ifneq ($(filter j4primelte j6primelte, $(TARGET_DEVICE)),)
 ODM_MANIFEST_SKUS += msm8917NFC
 ODM_MANIFEST_MSM8917NFC_FILES := \
-    $(COMMON_PATH)/manifest-nfc.xml
+    $(COMMON_PATH)/configs/vintf/manifest-nfc.xml
 endif
 
 # Kernel
@@ -144,7 +144,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 12348030976 # 25765059584 - 16384
 BOARD_CACHEIMAGE_PARTITION_SIZE := 106954752
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
+TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
 
 BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/dsp:/dsp \
