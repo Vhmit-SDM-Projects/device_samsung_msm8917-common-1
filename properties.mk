@@ -156,7 +156,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
     vendor.sec.rild.libpath2=/vendor/lib/libsec-ril-dsds.so \
     vendor.sec.rild.libpath=/vendor/lib/libsec-ril.so \
-    rild.libargs=-d /dev/umts_ipc0
+    rild.libargs=-d /dev/umts_ipc0 \
+    persist.radio.multisim.config=dsds
 
 # SurfaceFlinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
