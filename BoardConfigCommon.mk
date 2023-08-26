@@ -16,40 +16,12 @@
 COMMON_PATH := device/samsung/msm8917-common
 BOARD_VENDOR := samsung
 
-BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
-
-TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
-
 # Architecture
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
-
-# Platform
-TARGET_BOARD_PLATFORM := msm8937
-
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := RG13A002KU
-TARGET_NO_BOOTLOADER := true
-
-# Security patch level
-VENDOR_SECURITY_PATCH := 2020-08-01
-
-# Kernel
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7
-BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
-BOARD_KERNEL_IMAGE_NAME := zImage-dtb
-TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_SOURCE := kernel/samsung/msm8917
-
-# FM
-BOARD_HAS_QCA_FM_SOC := "cherokee"
-BOARD_HAVE_QCOM_FM := true
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -88,6 +60,15 @@ AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
 # APEX
 TARGET_FLATTEN_APEX := true
 
+# Build
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
+
+# Bootloader / Platform
+TARGET_BOOTLOADER_BOARD_NAME := RG13A002KU
+TARGET_NO_BOOTLOADER := true
+TARGET_BOARD_PLATFORM := msm8937
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/bluetooth/include
 BOARD_HAVE_BLUETOOTH_QCOM := true
@@ -112,8 +93,28 @@ endif
 # DT2W
 TARGET_TAP_TO_WAKE_NODE := "/sys/android_touch/doubletap2wake"
 
+# FM
+BOARD_HAS_QCA_FM_SOC := "cherokee"
+BOARD_HAVE_QCOM_FM := true
+
 # Fingerprint
 TARGET_SEC_FP_HAL_VARIANT := bauth
+
+# Filesystem
+TARGET_COPY_OUT_VENDOR := vendor
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := f2fs
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+
+# Graphics
+BOARD_USES_ADRENO := true
+TARGET_USES_ION := true
+TARGET_USES_C2D_COMPOSITION := true
+TARGET_USES_GRALLOC1 := true
+TARGET_USES_HWC2 := true
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
@@ -124,19 +125,24 @@ ODM_MANIFEST_MSM8917NFC_FILES := \
     $(COMMON_PATH)/manifest-nfc.xml
 endif
 
-# Filesystem
+# Kernel
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7
+BOARD_KERNEL_BASE := 0x80000000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8917
+
+# Lights
+TARGET_PROVIDES_LIBLIGHT=true
+
+# Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 12348030976 # 25765059584 - 16384
 BOARD_CACHEIMAGE_PARTITION_SIZE := 106954752
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-
-TARGET_COPY_OUT_VENDOR := vendor
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := f2fs
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
 
@@ -145,21 +151,11 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/firmware_mnt:/firmware \
     /mnt/vendor/persist:/persist \
 
-# Graphics
-BOARD_USES_ADRENO := true
-
-TARGET_USES_ION := true
-TARGET_USES_C2D_COMPOSITION := true
-TARGET_USES_GRALLOC1 := true
-TARGET_USES_HWC2 := true
-
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-
-# Lights
-TARGET_PROVIDES_LIBLIGHT=true
-
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
+
+# Recovery
+TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true
@@ -168,8 +164,8 @@ ENABLE_VENDOR_RIL_SERVICE := true
 # Root
 BOARD_ROOT_EXTRA_FOLDERS := config omr efs
 
-# Recovery
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
+# Security patch level
+VENDOR_SECURITY_PATCH := 2020-08-01
 
 # SELinux
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
@@ -199,4 +195,5 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_HAVE_SAMSUNG_WIFI := true
 
+# Inherit vendor
 -include vendor/samsung/msm8917-common/BoardConfigVendor.mk
