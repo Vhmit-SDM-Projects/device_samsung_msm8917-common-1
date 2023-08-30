@@ -1198,7 +1198,6 @@
         <item>7,1</item>
     </string-array>
 
-
     <!-- Enable AOD even tho we dont have amoled display -->
     <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
     
@@ -1229,4 +1228,7 @@
     <!-- If device supports corner radius on windows.
          This should be turned off on low-end devices to improve animation performance. -->
     <bool name="config_supportsRoundedCornersOnWindows">false</bool>
+    
+    <!-- Should the pinner service pin the Home application? -->
+    <bool name="config_pinnerHomeApp">false</bool>
 </resources>
