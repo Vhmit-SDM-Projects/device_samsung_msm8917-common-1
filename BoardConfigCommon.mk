@@ -16,13 +16,6 @@
 COMMON_PATH := device/samsung/msm8917-common
 BOARD_VENDOR := samsung
 
-# Architecture
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := cortex-a53
-
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
@@ -64,11 +57,6 @@ TARGET_FLATTEN_APEX := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
-# Bootloader / Platform
-TARGET_BOOTLOADER_BOARD_NAME := RG13A002KU
-TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := msm8937
-
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/configs/bluetooth/include
 BOARD_HAVE_BLUETOOTH_QCOM := true
@@ -108,6 +96,13 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := f2fs
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
+TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
+
+BOARD_ROOT_EXTRA_SYMLINKS := \
+    /vendor/dsp:/dsp \
+    /vendor/firmware_mnt:/firmware \
+    /mnt/vendor/persist:/persist \
+
 # Graphics
 BOARD_USES_ADRENO := true
 TARGET_USES_ION := true
@@ -126,30 +121,20 @@ ODM_MANIFEST_MSM8917NFC_FILES := \
 endif
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
+
+BOARD_KERNEL_CMDLINE := \
+    androidboot.hardware=qcom \
+    androidboot.bootdevice=7824900.sdhci \
+    lpm_levels.sleep_disabled=1 \
+    msm_rtb.filter=0x237 \
+    loop.max_part=7 \
+    ehci-hcd.park=3 \
+    console=null
+    
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
-BOARD_KERNEL_IMAGE_NAME := zImage-dtb
-TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8917
-
-# Lights
-TARGET_PROVIDES_LIBLIGHT=true
-
-# Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 12348030976 # 25765059584 - 16384
-BOARD_CACHEIMAGE_PARTITION_SIZE := 106954752
-BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-
-TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
-
-BOARD_ROOT_EXTRA_SYMLINKS := \
-    /vendor/dsp:/dsp \
-    /vendor/firmware_mnt:/firmware \
-    /mnt/vendor/persist:/persist \
 
 # Peripheral manager
 TARGET_PER_MGR_ENABLED := true
