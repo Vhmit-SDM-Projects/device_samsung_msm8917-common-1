@@ -105,11 +105,6 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/vintf/manifest.xml
 DEVICE_MATRIX_FILE := $(COMMON_PATH)/configs/vintf/compatibility_matrix.xml
-ifneq ($(filter j4primelte j6primelte, $(TARGET_DEVICE)),)
-ODM_MANIFEST_SKUS += msm8917NFC
-ODM_MANIFEST_MSM8917NFC_FILES := \
-    $(COMMON_PATH)/configs/vintf/manifest-nfc.xml
-endif
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
